@@ -13,15 +13,15 @@ import java.util.*
 
 object ArmorManager : ProfileLoadCallback {
     const val RPG_ARMOR_KEY = "RPGArmor"
-    const val HEAD_KEY =             "head"
-    const val CHEST_KEY =           "chest"
-    const val LEGS_KEY =            "legs"
-    const val FEET_KEY =            "feet"
-    const val NECKLACE_KEY =            "necklace"
-    const val BRACELET_LEFT_KEY =       "bracelet_left"
-    const val BRACELET_RIGHT_KEY =      "bracelet_right"
-    const val RING_LEFT_KEY =       "ring_left"
-    const val RING_RIGHT_KEY =      "ring_right"
+    const val HEAD_KEY = "head"
+    const val CHEST_KEY = "chest"
+    const val LEGS_KEY = "legs"
+    const val FEET_KEY = "feet"
+    const val NECKLACE_KEY = "necklace"
+    const val BRACELET_LEFT_KEY = "bracelet_left"
+    const val BRACELET_RIGHT_KEY = "bracelet_right"
+    const val RING_LEFT_KEY = "ring_left"
+    const val RING_RIGHT_KEY = "ring_right"
 
     const val HEAD_SLOT = 11
     const val CHEST_SLOT = HEAD_SLOT + 9
@@ -71,6 +71,74 @@ object ArmorManager : ProfileLoadCallback {
         var ringLeft: ItemStack,
         var ringRight: ItemStack,
     ) {
+        fun asList(): List<ItemStack> = listOf(head, chest, legs, feet, necklace, braceletLeft, braceletRight, ringLeft, ringRight)
+
+        fun tryPut(itemStack: ItemStack): Boolean {
+            when (itemStack.item) {
+                is ArmorType.Head -> {
+                    if (head.isEmpty) {
+                        head = itemStack
+                        return true
+                    }
+                }
+                is ArmorType.Chest ->
+                    if (chest.isEmpty) {
+                        chest = itemStack
+                        return true
+                    }
+                is ArmorType.Legs ->
+                    if (legs.isEmpty) {
+                        legs = itemStack
+                        return true
+                    }
+                is ArmorType.Feet ->
+                    if (feet.isEmpty) {
+                        feet = itemStack
+                        return true
+                    }
+                is ArmorType.Necklace ->
+                    if (necklace.isEmpty) {
+                        necklace = itemStack
+                        return true
+                    }
+                is ArmorType.Bracelet -> {
+                    if (braceletLeft.isEmpty) {
+                        braceletLeft = itemStack
+                        return true
+                    }
+                    if (braceletRight.isEmpty) {
+                        braceletRight = itemStack
+                        return true
+                    }
+                }
+                is ArmorType.Ring -> {
+                    if (ringLeft.isEmpty) {
+                        ringLeft = itemStack
+                        return true
+                    }
+                    if (ringRight.isEmpty) {
+                        ringRight = itemStack
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+
+        fun setFromSlot(slot: Int, itemStack: ItemStack) {
+            when (slot) {
+                HEAD_SLOT -> this.head = itemStack
+                CHEST_SLOT -> this.chest = itemStack
+                LEGS_SLOT -> this.legs = itemStack
+                FEET_SLOT -> this.feet = itemStack
+                NECKLACE_SLOT -> this.necklace = itemStack
+                BRACELET_LEFT_SLOT -> this.braceletLeft = itemStack
+                BRACELET_RIGHT_SLOT -> this.braceletRight = itemStack
+                RING_LEFT_SLOT -> this.ringLeft = itemStack
+                RING_RIGHT_SLOT -> this.ringRight = itemStack
+            }
+        }
+
         fun getFromSlot(slot: Int, default: ItemStack = ItemStack.EMPTY): ItemStack {
             return when (slot) {
                 HEAD_SLOT -> this.head
@@ -84,10 +152,6 @@ object ArmorManager : ProfileLoadCallback {
                 RING_RIGHT_SLOT -> this.ringRight
                 else -> default
             }
-        }
-
-        fun doAtSlot(slot: Int, callback: (ItemStack) -> Unit) {
-            callback(getFromSlot(slot))
         }
 
         companion object {
