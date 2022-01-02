@@ -1,0 +1,11 @@
+{
+  "rpg_player.gui.name.head": "Head Slot",
+  "rpg_player.gui.name.chest": "Chest Slot",
+  "rpg_player.gui.name.legs": "Legs Slot",
+  "rpg_player.gui.name.feet": "Feet Slot",
+  "rpg_player.gui.name.necklace": "Necklace",
+  "rpg_player.gui.name.bracelet_left": "Bracelet",
+  "rpg_player.gui.name.bracelet_right": "Bracelet",
+  "rpg_player.gui.name.ring_left": "Ring",
+  "rpg_player.gui.name.ring_right": "Ring"
+}
