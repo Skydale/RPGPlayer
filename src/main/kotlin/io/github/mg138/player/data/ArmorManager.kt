@@ -74,50 +74,51 @@ object ArmorManager : ProfileLoadCallback {
         fun asList(): List<ItemStack> = listOf(head, chest, legs, feet, necklace, braceletLeft, braceletRight, ringLeft, ringRight)
 
         fun tryPut(itemStack: ItemStack): Boolean {
+            val copied = itemStack.copy()
             when (itemStack.item) {
                 is ArmorType.Head -> {
                     if (head.isEmpty) {
-                        head = itemStack
+                        head = copied
                         return true
                     }
                 }
                 is ArmorType.Chest ->
                     if (chest.isEmpty) {
-                        chest = itemStack
+                        chest = copied
                         return true
                     }
                 is ArmorType.Legs ->
                     if (legs.isEmpty) {
-                        legs = itemStack
+                        legs = copied
                         return true
                     }
                 is ArmorType.Feet ->
                     if (feet.isEmpty) {
-                        feet = itemStack
+                        feet = copied
                         return true
                     }
                 is ArmorType.Necklace ->
                     if (necklace.isEmpty) {
-                        necklace = itemStack
+                        necklace = copied
                         return true
                     }
                 is ArmorType.Bracelet -> {
                     if (braceletLeft.isEmpty) {
-                        braceletLeft = itemStack
+                        braceletLeft = copied
                         return true
                     }
                     if (braceletRight.isEmpty) {
-                        braceletRight = itemStack
+                        braceletRight = copied
                         return true
                     }
                 }
                 is ArmorType.Ring -> {
                     if (ringLeft.isEmpty) {
-                        ringLeft = itemStack
+                        ringLeft = copied
                         return true
                     }
                     if (ringRight.isEmpty) {
-                        ringRight = itemStack
+                        ringRight = copied
                         return true
                     }
                 }
