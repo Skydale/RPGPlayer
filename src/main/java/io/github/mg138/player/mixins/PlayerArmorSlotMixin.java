@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ScreenHandler.class)
-public class PlayerArmorSlotMixin {
+public abstract class PlayerArmorSlotMixin {
 
     @Inject(
             at = @At("HEAD"),

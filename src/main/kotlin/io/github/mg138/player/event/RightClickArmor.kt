@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.client.networking.v1.C2SPlayChannelEvents
 import net.fabricmc.fabric.api.event.player.UseItemCallback
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.inventory.InventoryChangedListener
+import net.minecraft.item.ArmorItem
+import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.ItemStack
 import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket
 import net.minecraft.server.network.ServerPlayerEntity
@@ -25,7 +27,10 @@ object RightClickArmor {
                 return TypedActionResult(ActionResult.CONSUME_PARTIAL, itemStack)
             }
         }
-        return TypedActionResult(ActionResult.FAIL, itemStack)
+        if (itemStack.item is ArmorItem) {
+            return TypedActionResult.fail(itemStack)
+        }
+        return TypedActionResult.pass(itemStack)
     }
 
     fun register() {
