@@ -1,4 +1,4 @@
-package io.github.mg138.player.menu
+package io.github.mg138.player.event
 
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory

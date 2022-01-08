@@ -1,6 +1,6 @@
 package io.github.mg138.player.menu
 
-import net.minecraft.entity.player.PlayerInventory
+import io.github.mg138.player.event.PlayerActionCallback
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.ActionResult
